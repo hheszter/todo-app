@@ -1,0 +1,19 @@
+@use '../../../assets/mixins';
+
+.todo-list {
+    @include mixins.setSectionCenter();
+
+    table {
+        width: 90%;
+        margin: 2% auto;
+
+        td:nth-child(1){
+            width: 75%;
+        }
+
+        td:nth-child(2){
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}

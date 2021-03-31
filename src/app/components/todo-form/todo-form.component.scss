@@ -1,0 +1,24 @@
+@use '../../../assets/mixins';
+
+.todo-form {
+    @include mixins.setSectionCenter();
+
+    label,
+    small {
+        display: block;
+    }
+
+    input {
+        display: block;
+        width: 90%;
+    }
+
+    .save-btn {
+        display: block;
+        @include mixins.setButton();
+
+        &:hover {
+            @include mixins.setHoverBoxShadow();
+        }
+    }
+}

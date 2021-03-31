@@ -1,0 +1,8 @@
+<section class="todo-form">
+    <form [formGroup]="todoForm" (ngSubmit)="saveTodo()">
+        <label for="todo">New task:</label>
+        <input type="text" id="todo" formControlName="todo">
+        <!-- <small *ngIf="todoForm.get('todo').invalid && todoForm.get('todo').touched" [ngStyle]="{'color':'red'}">Invalid text, please correct it (Max.50 characters!)</small> -->
+        <button class="save-btn" [disabled]="todoForm.invalid">SAVE</button>
+    </form>
+</section>

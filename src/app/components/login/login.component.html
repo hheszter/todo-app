@@ -1,0 +1,34 @@
+<section>
+    <form *ngIf="!haveAccount" class="form" [formGroup]="signUpForm" (ngSubmit)=signUp()>
+        <div class="switch-button" (click)="switchForm()">I have account!</div>
+        <legend>Sign up!</legend>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" aria-describedby="emailHelp">
+        <small id="emailHelp">We'll never share your email with anyone else.</small>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password">
+
+        <label for="repassword">Password again:</label>
+        <input type="repassword" id="repassword" formControlName="repassword">
+
+        <button>SIGN UP</button>
+    </form>
+
+
+    <form *ngIf="haveAccount" class="form" [formGroup]="signInForm" (ngSubmit)=signIn()>
+        <div class="switch-button" (click)="switchForm()">I have no account yet!</div>
+        <legend>Sign in!</legend>
+
+        <label for="logEmail">Email:</label>
+        <input type="email" id="logEmail" formControlName="logEmail">
+
+        <label for="logPassword">Password:</label>
+        <input type="password" id="logPassword" formControlName="logPassword">
+
+        <button>SIGN IN</button>
+
+    </form>
+
+</section>

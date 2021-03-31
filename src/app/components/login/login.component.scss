@@ -1,0 +1,32 @@
+@use "../../../assets/colors";
+@use "../../../assets/mixins";
+
+.form {
+    @include mixins.setSectionCenter();
+
+    label,
+    input,
+    small {
+        display: block;
+        width: 90%;
+        margin: 0.5rem auto;
+    }
+
+    button {
+        @include mixins.setButton();
+
+        &:hover {
+            @include mixins.setHoverBoxShadow();
+        }
+    }
+}
+
+.switch-button {
+    float: right;
+    @include mixins.setButton();
+
+    &:hover {
+        cursor: pointer;
+        @include mixins.setHoverBoxShadow();
+    }
+}

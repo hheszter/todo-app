@@ -1,0 +1,22 @@
+@use '../assets/colors';
+
+@mixin setHoverBoxShadow($color: colors.$yellow-dark){
+    box-shadow: 0 0 8px $color, 0 0 5px $color inset;
+}
+
+@mixin setButton(){
+    font-family: 'Kiwi Maru', serif;
+    padding: 5px;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: colors.$orange-light;
+}
+
+@mixin setSectionCenter(){
+    border: 2px solid colors.$orange-dark;
+    border-radius: 15px;
+    width:90%;
+    margin: 2rem auto;
+    padding: 2rem;
+}
