@@ -1,4 +1,7 @@
+@use 'sass:color';
+
 @use '../../../assets/mixins';
+@use '../../../assets/colors';
 
 .todo-list {
     @include mixins.setSectionCenter();
@@ -16,4 +19,23 @@
             justify-content: space-evenly;
         }
     }
+}
+
+.todo {
+    text-decoration: none;
+    background: none;
+    font-weight: 400;
+    color: black;
+}
+
+.new {
+    background: color.scale(colors.$orange-dark, $lightness: 80%);
+    font-weight: 800;
+}
+
+.done {
+    text-decoration: line-through;
+    background: none;
+    font-weight: 200;
+    color: grey;
 }

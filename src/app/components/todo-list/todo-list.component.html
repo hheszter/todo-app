@@ -3,19 +3,13 @@
     <app-todo-form></app-todo-form>
 
             <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr>
-                        <td>Tennivaló</td>
+                    <tr *ngFor="let todo of todoList">
+                        <td class="todo" [ngClass]="{'new':todo.isNew, 'done':todo.isDone}">{{todo.todo}}</td>
                         <td>
-                                <button>Done</button>
-                                <button>Later</button>
-                                <button>Delete</button>
+                                <button (click)="newTodo(todo.id)">New</button>
+                                <button (click)="doneTodo(todo.id)">Done</button>
+                                <button (click)="deleteTodo(todo.id)">Delete</button>
                         </td>
                     </tr>
 
