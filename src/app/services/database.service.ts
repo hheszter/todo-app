@@ -17,7 +17,6 @@ export class DatabaseService {
     return this.firestore.collection("todos").valueChanges({idField: "id"}) //Observable
 
     // return this.firestore.collection("todos").ref.where("userID", "==", userId).orderBy("date").get(); //Promise
-
     // return this.firestore.collection("todos").get() //Observalble;
   }
 
