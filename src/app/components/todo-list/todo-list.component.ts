@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from 'src/app/services/database.service';
 
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -10,8 +16,15 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class TodoListComponent implements OnInit {
 
   todoList: Array<any> = [];
+  userID: string = "00nHuJ0QTLMyrqqCeaensTP2rFj1";
 
   databaseSubscription: Subscription | undefined;
+
+  envelope = faEnvelope;
+  envelopeOpen = faEnvelopeOpen;
+  trash = faTrashAlt;
+  check = faCheck;
+  list = faList;
 
   constructor(private db: DatabaseService) { }
 
@@ -23,7 +36,7 @@ export class TodoListComponent implements OnInit {
     this.databaseSubscription?.unsubscribe();
   }
 
-  getTodosFromDatabase(userId: string = "00nHuJ0QTLMyrqqCeaensTP2rFj1") {
+  getTodosFromDatabase() {
     // >>> using valueChanges():
     this.databaseSubscription = this.db.getTodos().subscribe(
       (doc: any) => {
@@ -31,7 +44,7 @@ export class TodoListComponent implements OnInit {
         doc.forEach((data: any) => {
           // show only the user's todo's:
           if (data.userID) {
-            if (data.userID === userId) {
+            if (data.userID === this.userID) {
               this.todoList.push(data)
             }
           }
@@ -41,7 +54,7 @@ export class TodoListComponent implements OnInit {
       },
       (err) => { console.error(err) },
       () => {
-        console.log(this.todoList);
+        // console.log(this.todoList);
         this.databaseSubscription?.unsubscribe();
       }
     )
@@ -57,7 +70,7 @@ export class TodoListComponent implements OnInit {
   }
 
   doneTodo(id: string) {
-    console.log(id);
+    // console.log(id);
     this.db.getTodoById(id).subscribe(
       (data: any) => {
         const todo = data.data();
