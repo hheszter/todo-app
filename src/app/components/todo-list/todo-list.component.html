@@ -7,9 +7,9 @@
                     <tr *ngFor="let todo of todoList">
                         <td class="todo" [ngClass]="{'new':todo.isNew, 'done':todo.isDone}">{{todo.todo}}</td>
                         <td>
-                                <button (click)="newTodo(todo.id)">New</button>
-                                <button (click)="doneTodo(todo.id)">Done</button>
-                                <button (click)="deleteTodo(todo.id)">Delete</button>
+                                <button class="btn" [ngClass]="{'clicked-btn':todo.isNew}" (click)="newTodo(todo.id)">New</button>
+                                <button class="btn" [ngClass]="{'clicked-btn':todo.isDone}" (click)="doneTodo(todo.id)">Done</button>
+                                <button class="btn" (click)="deleteTodo(todo.id)">Delete</button>
                         </td>
                     </tr>
 

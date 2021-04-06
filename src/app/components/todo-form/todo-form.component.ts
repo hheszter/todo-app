@@ -16,7 +16,7 @@ export class TodoFormComponent implements OnInit {
 
   constructor(private db: DatabaseService) {
     this.todoForm = new FormGroup({
-      todo: new FormControl('', [Validators.required, Validators.pattern(/^[\w@!,;:-\?\. áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{2,50}$/)])
+      todo: new FormControl('', [Validators.required, Validators.pattern(/^[\w@!,;:\-\?\.() áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{2,50}$/)])
     })
   }
 
