@@ -1,15 +1,18 @@
 <nav class="navbar">
-    <p class="navbar-brand">TODO's logo</p>
+    <p class="navbar-brand">
+        <img src="../../../assets/todo.png" alt="todo's logo">
+    </p>
     
     <ul class="h-menu-content">
         <li *ngIf="!loginStatus">
             <a routerLink="">Login</a>
         </li>
-        <li *ngIf="loginStatus">
-            <a routerLink="" (click)="logout()">Logout</a>
-        </li>
+        
         <li *ngIf="loginStatus">
             <a routerLink="/todos">SHOW TODO's</a>
+        </li>
+        <li *ngIf="loginStatus">
+            <a routerLink="" (click)="logout()">Logout</a>
         </li>
     </ul>
 </nav>
