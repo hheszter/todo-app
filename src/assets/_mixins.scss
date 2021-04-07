@@ -1,6 +1,6 @@
 @use '../assets/colors';
 
-@mixin setHoverBoxShadow($color: colors.$yellow-dark){
+@mixin setHoverBoxShadow($color: colors.$color3){
     box-shadow: 0 0 8px $color, 0 0 5px $color inset;
 }
 
@@ -10,13 +10,17 @@
     margin-top: 1rem;
     border: none;
     border-radius: 5px;
-    background: colors.$orange-light;
+    background: colors.$color2;
 }
 
 @mixin setSectionCenter(){
-    border: 2px solid colors.$orange-dark;
-    border-radius: 15px;
-    width:90%;
+    border: 2px solid colors.$color1;
+    border-radius: 5px;
+    width: 95%;
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 1rem;
+
+    @media screen and (min-width:680px) {
+        width: 75%;
+    }
 }

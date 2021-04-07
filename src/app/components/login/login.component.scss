@@ -23,6 +23,7 @@
 
 .switch-button {
     float: right;
+    font-size: small;
     @include mixins.setButton();
 
     &:hover {

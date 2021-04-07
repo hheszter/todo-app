@@ -1,12 +1,12 @@
 @use "../../../assets/colors";
 
 .footer {
-    margin-top: auto;
+    margin-top:  auto !important;
     text-align: center !important;
     
     .social-icon a {
         padding: 20px;
         text-decoration: none;
-        color: colors.$orange-dark;
+        color: colors.$color1;
     }
 }

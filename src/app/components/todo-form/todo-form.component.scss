@@ -2,6 +2,7 @@
 
 .todo-form {
     @include mixins.setSectionCenter();
+    margin-top: auto;
 
     label,
     small {

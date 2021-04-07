@@ -5,29 +5,31 @@
 .navbar {
     width: 100%;
     min-height: 60px;
-    background: colors.$orange-dark;
+    background: colors.$gray;
     margin: 0;
     padding: 1rem;
     display: flex;
     align-items: center;
 
     &-brand {
-        margin: auto 0;
-        padding: auto 3px;
+        margin: 0;
         height: 60px;
         width: 80px;
         overflow: hidden;
-
-        img{
-            max-height: 100%;
+        
+        .logo{
             max-width: 100%;
-            border-radius: 5px;
+            max-height: 60%;
+            margin: 15% auto;
+            background: transparent;
         }
     }
 }
 
 .h-menu-content {
+    width: 100%;
     display: flex;
+    justify-content: flex-end;
 
     li {
         list-style: none;
