@@ -71,4 +71,9 @@ export class LoginComponent implements OnInit {
         console.log(err.code);
       })
   }
+
+  resetPassword(){
+    let useremail = prompt("Enter your email:")
+    this.auth.getNewPassword(useremail);
+  }
 }

@@ -30,7 +30,7 @@
 
         <button [disabled]="signInForm.invalid">SIGN IN</button>
         <small *ngIf="invalidLogin">Invalid email or password!</small>
-        <small *ngIf="invalidLogin">If you forgot your password <span>click here!</span></small>
+        <small *ngIf="invalidLogin">If you forgot your password <span id="resetBtn" (click)="resetPassword()" >click here!</span></small>
     </form>
 
 </section>

@@ -37,4 +37,10 @@ export class AuthService {
         console.error(err)
       })
   }
+
+  getNewPassword(email:any){
+    this.auth.sendPasswordResetEmail(email)
+      .then(()=>alert("Email has been sent to reset your password!"))
+      .catch((err)=>console.error(err))
+  }
 }

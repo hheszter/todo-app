@@ -31,3 +31,12 @@
         @include mixins.setHoverBoxShadow();
     }
 }
+
+#resetBtn {
+    color: colors.$color1;
+    
+    &:hover {
+        cursor: pointer;
+        color: colors.$color3;
+    }
+}
