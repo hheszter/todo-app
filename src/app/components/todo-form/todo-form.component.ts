@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -11,7 +11,7 @@ export class TodoFormComponent implements OnInit {
 
   todoForm: FormGroup;
 
-  userID: string = "00nHuJ0QTLMyrqqCeaensTP2rFj1";
+  @Input() userID: any;
 
   constructor(private db: DatabaseService) {
     this.todoForm = new FormGroup({

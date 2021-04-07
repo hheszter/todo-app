@@ -11,9 +11,10 @@
         <input type="password" id="password" formControlName="password">
 
         <label for="repassword">Password again:</label>
-        <input type="repassword" id="repassword" formControlName="repassword">
+        <input type="password" id="repassword" formControlName="repassword">
 
-        <button>SIGN UP</button>
+        <button [disabled]="signUpForm.invalid">SIGN UP</button>
+        <small *ngIf="emailIsUsed">This email address is already in use! Please sign in! </small>
     </form>
 
 
@@ -27,8 +28,9 @@
         <label for="logPassword">Password:</label>
         <input type="password" id="logPassword" formControlName="logPassword">
 
-        <button>SIGN IN</button>
-
+        <button [disabled]="signInForm.invalid">SIGN IN</button>
+        <small *ngIf="invalidLogin">Invalid email or password!</small>
+        <small *ngIf="invalidLogin">If you forgot your password <span>click here!</span></small>
     </form>
 
 </section>

@@ -7,6 +7,7 @@ import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,7 +17,7 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 export class TodoListComponent implements OnInit {
 
   todoList: Array<any> = [];
-  userID: string = "00nHuJ0QTLMyrqqCeaensTP2rFj1";
+  userID: any;
 
   databaseSubscription: Subscription | undefined;
 
@@ -26,10 +27,17 @@ export class TodoListComponent implements OnInit {
   check = faCheck;
   list = faList;
 
-  constructor(private db: DatabaseService) { }
+  constructor(private db: DatabaseService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.getTodosFromDatabase();
+    this.userID = this.getUserId();
+    this.auth.loginStatusChanged.subscribe(
+      ()=>{
+        this.userID = this.getUserId();
+      },
+      (err:any)=>{console.log(err)}
+    )
   }
 
   ngOnDestroy(): void {
@@ -100,6 +108,10 @@ export class TodoListComponent implements OnInit {
     this.db.updateTodo(id, newData)
       .then(() => console.log("updated..."))
       .catch((err) => console.error(err))
+  }
+
+  getUserId(){
+    return window.localStorage.getItem("todo-userID")
   }
 
 }
