@@ -12,6 +12,10 @@
         margin: 0.5rem auto;
     }
 
+    .error {
+        color: red;
+    }
+
     button {
         @include mixins.setButton();
 

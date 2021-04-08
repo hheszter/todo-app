@@ -5,13 +5,19 @@
 
         <label for="email">Email:</label>
         <input type="email" id="email" formControlName="email" aria-describedby="emailHelp">
+        <small *ngIf="signUpForm.get('email')?.invalid &&
+                    signUpForm.get('email')?.touched" class="error">Invalid email address!</small>
         <small id="emailHelp">We'll never share your email with anyone else.</small>
 
         <label for="password">Password:</label>
         <input type="password" id="password" formControlName="password">
+        <small *ngIf="signUpForm.get('password')?.invalid &&
+                    signUpForm.get('password')?.touched" class="error">Invalid password! It should be at least 6 characters(only letters, numbers, ! and ?) and at most 20 characters!</small>
 
         <label for="repassword">Password again:</label>
         <input type="password" id="repassword" formControlName="repassword">
+        <small *ngIf="signUpForm.get('repassword')?.invalid &&
+                    signUpForm.get('repassword')?.touched" class="error">Invalid password! This should be the same!</small>
 
         <button [disabled]="signUpForm.invalid">SIGN UP</button>
         <small *ngIf="emailIsUsed">This email address is already in use! Please sign in! </small>

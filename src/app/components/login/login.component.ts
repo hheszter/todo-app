@@ -20,10 +20,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService) {
-    this.signUpForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w\.]+@\w+\.[a-z\.]{2,5}$/)]),
-      password: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?:]{6,20}$/)]),
-      repassword: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?:]{6,20}$/)])
+    
+      this.signUpForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w\.]+@\w+\.[a-z\.]{2,6}$/)]),
+      password: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?]{6,20}$/)]),
+      repassword: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?]{6,20}$/)])
     });
 
     this.signInForm = new FormGroup({
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    if(window.localStorage.getItem("todo-userID")){
+      this.router.navigate(["todos"]);
+    }
   }
 
   switchForm(){
@@ -43,18 +46,22 @@ export class LoginComponent implements OnInit {
   signUp(){
     const regData = this.signUpForm.value;
 
-    this.auth.signUp(regData.email, regData.password)
-      .then(()=>{
-        this.signUpForm.reset();
-        this.switchForm();
-      })
-      .catch(err=>{
-        if(err.code=="auth/email-already-in-use"){ 
-          this.emailIsUsed = true;
-        } else {
-          console.error(err)
-        }
-      })
+    if(regData.password !== regData.repassword){
+      alert("Passwords are not the same!")
+    } else {
+      this.auth.signUp(regData.email, regData.password)
+        .then(()=>{
+          this.signUpForm.reset();
+          this.switchForm();
+        })
+        .catch(err=>{
+          if(err.code=="auth/email-already-in-use"){ 
+            this.emailIsUsed = true;
+          } else {
+            console.error(err)
+          }
+        })
+    }
   }
 
   signIn(){
@@ -64,6 +71,7 @@ export class LoginComponent implements OnInit {
       .then(()=>{
         console.log("login is successfully...");
         this.auth.setLocaleStorage();
+        this.signInForm.reset();
         this.router.navigate(["todos"]);
       })
       .catch((err)=>{

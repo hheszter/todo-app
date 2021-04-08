@@ -43,6 +43,10 @@
         opacity: 0.7;
         font-weight: 800;
     }
+
+    &-all {
+        display: block;
+    }
 }
 
 /*todo's status: */
@@ -64,6 +68,8 @@
 
     &::before{
         content: "✔ ";
+        color: colors.$color1;
+        font-size: 1.4rem;
     }
 }
 

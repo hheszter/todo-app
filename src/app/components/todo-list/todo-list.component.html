@@ -1,6 +1,6 @@
 <section class="todo-list">
 
-    <app-todo-form [userID]="userID"></app-todo-form>
+    <app-todo-form [userID]="userID" [todoList]="todoList"></app-todo-form>
 
             <table>
                 <tbody>
@@ -19,9 +19,11 @@
                                     <fa-icon [icon]="trash"></fa-icon>
                                 </button>
                         </td>
-                    </tr>
-
+                    </tr>   
                 </tbody>
             </table>
+
+            <button class="btn btn-all" (click)="deleteAll()">All <fa-icon [icon]="trash"></fa-icon></button>
+
 
 </section>

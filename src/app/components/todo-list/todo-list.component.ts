@@ -8,6 +8,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -17,6 +18,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class TodoListComponent implements OnInit {
 
   todoList: Array<any> = [];
+  isList: boolean = false;
   userID: any;
 
   databaseSubscription: Subscription | undefined;
@@ -27,11 +29,18 @@ export class TodoListComponent implements OnInit {
   check = faCheck;
   list = faList;
 
-  constructor(private db: DatabaseService, private auth: AuthService) { }
+  constructor(private db: DatabaseService, 
+              private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getTodosFromDatabase();
     this.userID = this.getUserId();
+
+    if(!this.userID){
+      this.router.navigate([""])
+    }
+
     this.auth.loginStatusChanged.subscribe(
       ()=>{
         this.userID = this.getUserId();
@@ -49,6 +58,7 @@ export class TodoListComponent implements OnInit {
     this.databaseSubscription = this.db.getTodos().subscribe(
       (doc: any) => {
         this.todoList = [];
+        console.log("get todos from database")
         doc.forEach((data: any) => {
           // show only the user's todo's:
           if (data.userID) {
@@ -61,20 +71,25 @@ export class TodoListComponent implements OnInit {
         this.todoList.sort((a, b) => a.date - b.date);
       },
       (err) => { console.error(err) },
-      () => {
-        // console.log(this.todoList);
-        this.databaseSubscription?.unsubscribe();
-      }
+      () => { this.databaseSubscription?.unsubscribe() }
     )
+  }
+
+  getUserId(){
+    return window.localStorage.getItem("todo-userID")
+  }
+
+  deleteAll(){
+    this.todoList.forEach(todo=>{
+      this.deleteTodo(todo.id)
+    })
   }
 
   deleteTodo(id: string) {
     this.db.deleteTodo(id)
-      .then(() => {
-        console.log(id + " deleted");
-        this.getTodosFromDatabase();
-      })
+      .then(() => {this.getTodosFromDatabase()})
       .catch(err => console.error(err))
+    
   }
 
   doneTodo(id: string) {
@@ -106,12 +121,7 @@ export class TodoListComponent implements OnInit {
 
   updateTodo(id: string, newData: any) {
     this.db.updateTodo(id, newData)
-      .then(() => console.log("updated..."))
+      .then(() => {})
       .catch((err) => console.error(err))
   }
-
-  getUserId(){
-    return window.localStorage.getItem("todo-userID")
-  }
-
 }
