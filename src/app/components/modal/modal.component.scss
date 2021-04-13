@@ -1,0 +1,45 @@
+@use '../../../assets/colors';
+@use '../../../assets/mixins';
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(30,30,30,0.5);
+    z-index: 10;
+
+    .modal {
+        width:80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: colors.$color1;
+        padding: 1rem;
+
+        @media only screen and (min-width:768px) {
+            width: 40%;
+        }
+
+        &-content {
+            text-align: center;
+        }
+
+        &-btn {
+            display: block;
+            width: 100%;
+            @include mixins.setButton();
+
+            &:hover {
+                @include mixins.setHoverBoxShadow();
+            }
+
+            @media only screen and (min-width: 768px) {
+                width: 60%;
+                margin: 3px auto;
+            }
+        }
+    }
+}

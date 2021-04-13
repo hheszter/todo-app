@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
   signUpForm: FormGroup;
   signInForm: FormGroup;
 
+  showModal: boolean = false;
+  modalContent: string = "";
+
   constructor(
     private router: Router,
     private auth: AuthService) {
@@ -47,7 +50,9 @@ export class LoginComponent implements OnInit {
     const regData = this.signUpForm.value;
 
     if(regData.password !== regData.repassword){
-      alert("Passwords are not the same!")
+      //set modal:
+      this.showModal = true;
+      this.modalContent = "Passwords are not the same!";
     } else {
       this.auth.signUp(regData.email, regData.password)
         .then(()=>{
@@ -83,5 +88,9 @@ export class LoginComponent implements OnInit {
   resetPassword(){
     let useremail = prompt("Enter your email:")
     this.auth.getNewPassword(useremail);
+  }
+
+  close(){
+    this.showModal = false;
   }
 }

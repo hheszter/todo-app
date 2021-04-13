@@ -11,6 +11,9 @@ export class TodoFormComponent implements OnInit {
 
   todoForm: FormGroup;
 
+  showModal: boolean = false;
+  modalContent: string = "";
+
   @Input() userID: any;
   @Input() todoList: any;
 
@@ -27,12 +30,12 @@ export class TodoFormComponent implements OnInit {
   saveTodo() {
     const todo = this.todoForm.value;
 
-    if(!this.checkTodo(todo.todo)){
+    if (!this.checkTodo(todo.todo)) {
       todo.date = new Date();
       todo.isNew = true;
       todo.isDone = false;
       todo.userID = this.userID;
-  
+
       this.db.saveTodo(todo)
         .then((data) => {
           console.log("saved " + data.id);
@@ -42,14 +45,20 @@ export class TodoFormComponent implements OnInit {
     }
   }
 
-  checkTodo(content:string){
+  checkTodo(content: string) {
     let isSame = false;
     this.todoList.map((item: any) => {
       if (item.todo === content) {
-        alert("Van már ilyen todo a listádon!");
+        //set modal:
+        this.showModal = true;
+        this.modalContent = "This task is already been saved!";
         isSame = true;
       }
     });
     return isSame
+  }
+
+  close() {
+    this.showModal = false;
   }
 }

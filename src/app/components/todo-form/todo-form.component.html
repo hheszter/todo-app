@@ -6,3 +6,5 @@
         <button class="save-btn" [disabled]="todoForm.invalid">SAVE</button>
     </form>
 </section>
+
+<app-modal *ngIf="showModal" [content]="modalContent" (closeModalEvent)="close()"></app-modal>
