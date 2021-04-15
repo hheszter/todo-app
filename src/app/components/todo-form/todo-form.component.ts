@@ -42,6 +42,8 @@ export class TodoFormComponent implements OnInit {
           this.todoForm.reset();
         })
         .catch(err => console.error(err))
+    } else {
+      this.todoForm.reset();
     }
   }
 

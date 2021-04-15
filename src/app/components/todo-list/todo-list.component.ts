@@ -93,7 +93,6 @@ export class TodoListComponent implements OnInit {
   }
 
   doneTodo(id: string) {
-    // console.log(id);
     this.db.getTodoById(id).subscribe(
       (data: any) => {
         const todo = data.data();
