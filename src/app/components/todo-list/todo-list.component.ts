@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
 
   todoList: Array<any> = [];
   isList: boolean = false;
-  userID: any;
+  userID: any = this.getUserId();
 
   databaseSubscription: Subscription | undefined;
 
@@ -34,17 +34,16 @@ export class TodoListComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.getTodosFromDatabase();
     this.userID = this.getUserId();
+    console.log(this.userID);
+    this.getTodosFromDatabase();
 
     if(!this.userID){
       this.router.navigate([""])
     }
 
     this.auth.loginStatusChanged.subscribe(
-      ()=>{
-        this.userID = this.getUserId();
-      },
+      ()=>this.userID = this.getUserId(),
       (err:any)=>{console.log(err)}
     )
   }
@@ -70,7 +69,9 @@ export class TodoListComponent implements OnInit {
         // sorting by date:
         this.todoList.sort((a, b) => a.date - b.date);
       },
-      (err) => { console.error(err) },
+      (err) => {
+        console.error(err) 
+      },
       () => { this.databaseSubscription?.unsubscribe() }
     )
   }
@@ -89,7 +90,6 @@ export class TodoListComponent implements OnInit {
     this.db.deleteTodo(id)
       .then(() => {this.getTodosFromDatabase()})
       .catch(err => console.error(err))
-    
   }
 
   doneTodo(id: string) {

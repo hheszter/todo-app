@@ -2,28 +2,28 @@
 
     <app-todo-form [userID]="userID" [todoList]="todoList"></app-todo-form>
 
-            <table>
-                <tbody>
-                    <tr *ngFor="let todo of todoList">
-                        <td class="todo" [ngClass]="{'new':todo.isNew, 'done':todo.isDone}">{{todo.todo}}</td>
-                        <td>
-                                <button class="btn" [ngClass]="{'clicked-btn':todo.isNew}" (click)="newTodo(todo.id)">
-                                    <fa-icon *ngIf="todo.isNew" [icon]="envelopeOpen"></fa-icon>
-                                    <fa-icon *ngIf="!todo.isNew" [icon]="envelope"></fa-icon>
-                                </button>
-                                <button class="btn" [ngClass]="{'clicked-btn':todo.isDone}" (click)="doneTodo(todo.id)">
-                                    <fa-icon *ngIf="todo.isDone" [icon]="list"></fa-icon>
-                                    <fa-icon *ngIf="!todo.isDone" [icon]="check"></fa-icon>
-                                </button>
-                                <button class="btn" (click)="deleteTodo(todo.id)">
-                                    <fa-icon [icon]="trash"></fa-icon>
-                                </button>
-                        </td>
-                    </tr>   
-                </tbody>
-            </table>
+    <table>
+        <tbody>
+            <tr *ngFor="let todo of todoList">
+                <td class="todo" [ngClass]="{'new':todo.isNew, 'done':todo.isDone}">{{todo.todo}}</td>
+                <td>
+                        <button class="btn" [ngClass]="{'clicked-btn':todo.isNew}" (click)="newTodo(todo.id)">
+                            <fa-icon *ngIf="todo.isNew" [icon]="envelopeOpen"></fa-icon>
+                            <fa-icon *ngIf="!todo.isNew" [icon]="envelope"></fa-icon>
+                        </button>
+                        <button class="btn" [ngClass]="{'clicked-btn':todo.isDone}" (click)="doneTodo(todo.id)">
+                            <fa-icon *ngIf="todo.isDone" [icon]="list"></fa-icon>
+                            <fa-icon *ngIf="!todo.isDone" [icon]="check"></fa-icon>
+                        </button>
+                        <button class="btn" (click)="deleteTodo(todo.id)">
+                            <fa-icon [icon]="trash"></fa-icon>
+                        </button>
+                </td>
+            </tr>   
+        </tbody>
+    </table>
 
-            <button class="btn btn-all" (click)="deleteAll()">All <fa-icon [icon]="trash"></fa-icon></button>
+    <button class="btn btn-all" (click)="deleteAll()">All <fa-icon [icon]="trash"></fa-icon></button>
 
 
 </section>

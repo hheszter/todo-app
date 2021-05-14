@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private auth: AuthService) {
     
-      this.signUpForm = new FormGroup({
+    this.signUpForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w\.]+@\w+\.[a-z\.]{2,6}$/)]),
       password: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?]{6,20}$/)]),
       repassword: new FormControl('', [Validators.required, Validators.pattern(/^[\w\!\?]{6,20}$/)])
