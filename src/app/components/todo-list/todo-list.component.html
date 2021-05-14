@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <button class="btn btn-all" (click)="deleteAll()">All <fa-icon [icon]="trash"></fa-icon></button>
+    <button *ngIf="todoList.length!==0" class="btn btn-all" (click)="deleteAll()">All <fa-icon [icon]="trash"></fa-icon></button>
 
 
 </section>

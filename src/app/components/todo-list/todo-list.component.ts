@@ -49,7 +49,7 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.databaseSubscription?.unsubscribe();
+     this.databaseSubscription?.unsubscribe();
   }
 
   getTodosFromDatabase() {
@@ -57,7 +57,7 @@ export class TodoListComponent implements OnInit {
     this.databaseSubscription = this.db.getTodos().subscribe(
       (doc: any) => {
         this.todoList = [];
-        console.log("get todos from database")
+        console.log("get todos from database...")
         doc.forEach((data: any) => {
           // show only the user's todo's:
           if (data.userID) {
@@ -93,7 +93,7 @@ export class TodoListComponent implements OnInit {
   }
 
   doneTodo(id: string) {
-    this.db.getTodoById(id).subscribe(
+    this.databaseSubscription = this.db.getTodoById(id).subscribe(
       (data: any) => {
         const todo = data.data();
 
@@ -101,12 +101,14 @@ export class TodoListComponent implements OnInit {
         todo.isNew = false;
 
         this.updateTodo(id, todo);
-      }
+      },
+      (err) => { console.error(err) },
+      () => { this.databaseSubscription?.unsubscribe() }
     )
   }
 
   newTodo(id: string) {
-    this.db.getTodoById(id).subscribe(
+    this.databaseSubscription = this.db.getTodoById(id).subscribe(
       (data: any) => {
         const todo = data.data();
 
@@ -114,7 +116,9 @@ export class TodoListComponent implements OnInit {
         todo.isDone = false;
 
         this.updateTodo(id, todo);
-      }
+      },
+      (err) => { console.error(err) },
+      () => { this.databaseSubscription?.unsubscribe() }
     )
   }
 
